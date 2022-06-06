@@ -8,12 +8,12 @@ import {
 } from "../../api";
 
 export class Miner {
+
   static mine = async () => {
+    
     const pool = await getPool();
 
     if (pool.length < 2) return
-
-    console.log("VELCIINA POOL-A je ", pool.length)
 
     pool.forEach((temp) => {
       removeTransactionFromPool(temp.hash);
@@ -44,10 +44,11 @@ export class Miner {
     console.log(id)
 
     addToBlockchain(block)
-  };
+};
 
   static isGoldenHash(block: Block): boolean {
     const leadingZeros = Utill.GENESIS_HASH.substring(0, Utill.DIFFICULTY);
     return block.hash.substring(0, Utill.DIFFICULTY) === leadingZeros;
   }
+
 }

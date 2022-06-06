@@ -1,6 +1,5 @@
-
 export class RealEstate {
-  id?: number
+  id: number
   municipalityNum: number;
   squareFootage: number;
   addres: string;
