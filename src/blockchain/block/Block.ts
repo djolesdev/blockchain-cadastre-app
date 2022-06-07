@@ -3,7 +3,7 @@ import sha256 from "crypto-js/sha256";
 
 export class Block {
   id: number;
-  transactions: Transaction[] | any
+  transactions: Transaction[]
   hash: string;
   previousHash: string;
   nonce: number;

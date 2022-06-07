@@ -21,11 +21,9 @@ const SubmitForm = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-
     return () => {
-      Miner.mine()
-    }
-
+      Miner.mine();
+    };
   }, [transactionCount]);
 
   const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -33,11 +31,11 @@ const SubmitForm = () => {
 
     addTransactionToPool(new Transaction(user, realEstate, new Date()));
 
-    dispatch(addTransaction(1))
+    dispatch(addTransaction(1));
 
-    dispatch(nextStep(-2))
+    dispatch(nextStep(-2));
 
-    navigate('/first-step')
+    navigate("/first-step");
   };
 
   return (
@@ -64,7 +62,7 @@ const SubmitForm = () => {
           Addres: <span>{realEstate.addres}</span>
         </h3>
       </div>
-      <button type="submit" className="submit-btn">
+      <button type="submit" className="btn" id="submit-btn">
         Add to Blockchain
       </button>
     </form>

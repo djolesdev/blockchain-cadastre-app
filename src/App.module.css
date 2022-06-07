@@ -3,7 +3,8 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: .8em;
+    gap: 2em;
     justify-content: center;
     align-items: center;
+    background-color: hsl(229, 15%, 14%);
 }

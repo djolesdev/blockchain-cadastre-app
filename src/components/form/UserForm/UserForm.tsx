@@ -19,35 +19,34 @@ const UserForm = () => {
   const inputsValuesValid =
     name.isValueValid && surname.isValueValid && JMBG.isValueValid;
 
-  const nameClasses = name.isInputInvalid ? "invalid" : "";
-  const surnameClasses = surname.isInputInvalid ? "invalid" : "";
-  const JMBGClasses = JMBG.isInputInvalid ? "invalid" : "";
 
   return (
     <section className="slide" id="second">
       <h1 className="slide-heading">Enter Persons data</h1>
       <input
-        className={nameClasses}
+        className= "input"
         type="text"
         placeholder="Enter persons name"
         onChange={name.inputOnChange}
         onBlur={name.inputOnBlur}
       />
       <input
-        className={surnameClasses}
+        className= "input"
         type="text"
         placeholder="Enter persons surname"
         onChange={surname.inputOnChange}
         onBlur={surname.inputOnBlur}
       />
       <input
-        className={JMBGClasses}
+        className= "input"
         type="text"
         placeholder="Enter persons JMBG"
         onChange={JMBG.inputOnChange}
         onBlur={JMBG.inputOnBlur}
       />
       <button
+      className="btn"
+      disabled = {!inputsValuesValid}
         onClick={(event) => {
           event.preventDefault();
 

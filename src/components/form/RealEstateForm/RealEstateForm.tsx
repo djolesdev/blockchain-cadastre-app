@@ -1,13 +1,8 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import { isIdentifier } from "typescript";
 import { RealEstate } from "../../../blockchain/models/RealEstate";
 import { nextStep } from "../../../store/form-slice";
 import { setRealEstate } from "../../../store/real-estate-slice";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../store/redux-hooks/hooks";
+import { useAppDispatch } from "../../../store/redux-hooks/hooks";
 import useInput from "../../hooks/useInput";
 import "../Form.css";
 
@@ -24,39 +19,51 @@ const RealEstateForm = () => {
     squareFootage.isValueValid &&
     addres.isValueValid;
 
-  const municipalityClasses = municipality.isInputInvalid ? "invalid" : "";
-  const squareFootageClasses = squareFootage.isInputInvalid ? "invalid" : "";
-  const addreslasses = addres.isInputInvalid ? "invalid" : "";
 
   return (
     <section className="slide" id="third">
       <h1 className="slide-heading">Enter Real Estate data</h1>
       <input
-        className={municipalityClasses}
+        className= "input"
         onChange={municipality.inputOnChange}
         onBlur={municipality.inputOnBlur}
         type="number"
         placeholder="Enter municipality number"
       />
       <input
-        className={squareFootageClasses}
+        className= "input"
         onChange={squareFootage.inputOnChange}
         onBlur={squareFootage.inputOnBlur}
         type="text"
         placeholder="Enter square footage"
       />
-      <input className={addreslasses} type="text" placeholder="Enter addres" 
-              onChange={addres.inputOnChange}
-              onBlur={addres.inputOnBlur}/>
+      <input
+        className= "input"
+        type="text"
+        placeholder="Enter addres"
+        onChange={addres.inputOnChange}
+        onBlur={addres.inputOnBlur}
+      />
       <button
+            className="btn"
+        disabled = {!inputsValuesValid}
         onClick={(event) => {
           event.preventDefault();
 
-          if (!inputsValuesValid) return
+          if (!inputsValuesValid) return;
 
-          dispatch(setRealEstate(new RealEstate(1, +municipality.value, +squareFootage.value, addres.value)))
+          dispatch(
+            setRealEstate(
+              new RealEstate(
+                1,
+                +municipality.value,
+                +squareFootage.value,
+                addres.value
+              )
+            )
+          );
 
-          dispatch(nextStep(1))
+          dispatch(nextStep(1));
           navigate("/check-data");
         }}
       >

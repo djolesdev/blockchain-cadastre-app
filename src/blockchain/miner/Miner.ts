@@ -14,7 +14,7 @@ export class Miner {
     const pool = await getPool();
 
     if (pool.length < 2) return
-
+    
     pool.forEach((temp) => {
       removeTransactionFromPool(temp.hash);
     });

@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../store/redux-hooks/hooks";
 import { setEmail } from "../../store/worker-slice";
 import { useNavigate } from "react-router-dom";
 import style from './Login.module.css'
+import loginImg from '../../asset/login-icon.png'
 
 const Login = () => {
 
@@ -12,23 +13,29 @@ const Login = () => {
   const navigate = useNavigate()
 
   const email = useInput((value) => {
-    const regex = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$";
+    if (value.length === 0) return false
+    const regex = `/^\S+@\S+\.\S+$/`;
     value.trim();
     const match = value.match(regex);
 
     return match ? false : true;
   });
-
   const password = useInput((value) => value.length >= 4);
+
+  const inputsValuesValid = email.isValueValid && password.isValueValid;
+  const btnClasses = inputsValuesValid ? `${style.valid}` : `${style.invalid}`
 
   const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const auth = getAuth();
 
+    console.log(inputsValuesValid)
+
     signInWithEmailAndPassword(auth, email.value, password.value)
       .then((userCredential) => {
         const user = userCredential.user;
 
+        
         // Baca gresku zbog nevalidnog tipa
         // dispatch(setEmail(user.email))
         
@@ -43,6 +50,9 @@ const Login = () => {
 
   return (
     <form onSubmit={submitHandler} className={style['login-form']}>
+
+      <img src={loginImg} alt="" className={style['login-icon']}/>
+
       <input
         type="email"
         placeholder="djolesdev@gmail.com"
@@ -56,7 +66,7 @@ const Login = () => {
         onBlur={password.inputOnBlur}
       />
 
-      <button type="submit">Login</button>
+      <button type="submit" disabled={!inputsValuesValid}>{inputsValuesValid ? 'Login' : 'Enter login data'}</button>
     </form>
   );
 };
